@@ -40,22 +40,29 @@ def mergesort(list):
 		return new_list
 
 
-print("Press q to quit inserting values\n")
-list = []
-i = 0
-while(True):
-	x = input("Input : ")
-	if x == "q" or x == "Q":
-		break
-	else:
-		x = re.sub('[a-zA-Z,:()" "]','', x)
-		if len(x) != 0:
-			print("Your input of ",x,"has been added")
-			list.insert(i,int(x))
-			i+=1
+if __name__ == "__main__":
+
+	print("Press q to quit inserting values\n")
+	list = []
+	i = 0
+	while(True):
+		x = input("Input : ")
+		if x == "q" or x == "Q":
+			break
 		else:
-			print("Couldn't be added")
-print("Unsorted List : ",end="")
-print(list)
-print(" Sorted  List : ",end="")
-print(mergesort(list))
+			try:
+				list.insert(i, int(x))
+				print("Your input of ",x,"has been added")
+				i+=1
+			except:
+				print("Couldn't be added")
+
+	if len(list) == 0:
+		print("\n\nNothing to sort")
+		print("Goodbye human")
+	else:
+		print("Unsorted List : ",end="")
+		print(list)
+		print(" Sorted  List : ",end="")
+		print(mergesort(list))
+		print("\n\n  Goodbye Human")
