@@ -1,30 +1,28 @@
-import re
-
 fl = 0
 
 
-def mergesort(list):
+def merge_sort(array_unsorted):
     global fl
     new_list = []
-    if len(list) == 1:
-        return list
-    elif len(list) == 2:
-        if list[0] > list[1]:
+    if len(array_unsorted) == 1:
+        return array_unsorted
+    elif len(array_unsorted) == 2:
+        if array_unsorted[0] > array_unsorted[1]:
             fl += 1
-            new_list.append(list[1])
-            new_list.append(list[0])
+            new_list.append(array_unsorted[1])
+            new_list.append(array_unsorted[0])
         else:
-            new_list.append(list[0])
-            new_list.append(list[1])
+            new_list.append(array_unsorted[0])
+            new_list.append(array_unsorted[1])
         return new_list
     else:
-        if len(list) % 2 == 0:
-            first_half = mergesort(list[:int(len(list) / 2)])
+        if len(array_unsorted) % 2 == 0:
+            first_half = merge_sort(array_unsorted[:int(len(array_unsorted) / 2)])
         else:
-            first_half = mergesort(list[:int(len(list) / 2) + 1])
-        second_half = mergesort(list[len(list) - int(len(list) / 2):])
+            first_half = merge_sort(array_unsorted[:int(len(array_unsorted) / 2) + 1])
+        second_half = merge_sort(array_unsorted[len(array_unsorted) - int(len(array_unsorted) / 2):])
         running = True
-        while (running):
+        while running:
             if len(first_half) != 0 and len(second_half) != 0:
                 if first_half[0] <= second_half[0]:
                     new_list.append(first_half[0])
@@ -49,27 +47,27 @@ def mergesort(list):
 if __name__ == "__main__":
 
     print("Press q to quit inserting values\n")
-    list = []
+    unsorted_array = []
     i = 0
-    while (True):
+    while True:
         x = input("Input : ")
         if x == "q" or x == "Q":
             break
         else:
             try:
-                list.insert(i, int(x))
+                unsorted_array.insert(i, int(x))
                 print("Your input of ", x, "has been added")
                 i += 1
-            except:
+            finally:
                 print("Couldn't be added")
 
-    if len(list) == 0:
+    if len(unsorted_array) == 0:
         print("\n\nNothing to sort")
         print("Goodbye human")
     else:
         print("Unsorted List : ", end="")
-        print(list)
+        print(unsorted_array)
         print(" Sorted  List : ", end="")
-        print(mergesort(list))
+        print(merge_sort(unsorted_array))
         print("\nInversions Present : ", fl)
         print("\n\n  Goodbye Human")
